@@ -15,8 +15,6 @@
 <meta property="og:locale" content="pl_PL">
 <meta property="og:title" content="wvnch4j – Minecraft na YouTube">
 <meta property="og:description" content="Filmy na YouTube, klipy na TikToku, SwiebaClient, sklep Instant TXT i Discord – wszystkie linki wvnch4j w jednym miejscu.">
-<!-- UWAGA: po wrzuceniu strony na hosting zamień "og-image.png" na pełny adres, np. https://twojadomena.pl/og-image.png
-     i dodaj <link rel="canonical" href="https://twojadomena.pl/"> oraz <meta property="og:url" content="https://twojadomena.pl/"> -->
 <meta property="og:image" content="og-image.png">
 <meta property="og:image:alt" content="wvnch4j – linki do YouTube, TikToka, SwiebaClient, Instant TXT i Discorda">
 <meta name="twitter:card" content="summary_large_image">
@@ -63,14 +61,14 @@ h1{font-family:'Press Start 2P',monospace;font-weight:400;font-size:clamp(28px,8
 .name{font-family:'Press Start 2P',monospace;font-size:13px;line-height:1.4}
 .desc{font-size:21px;color:#5a3fa8;line-height:1}
 footer{order:2;position:relative;z-index:2;margin-top:auto;height:36px;line-height:14px;padding:10px 12px 0;font-family:'Press Start 2P',monospace;font-size:11px;color:#fff;text-shadow:2px 2px 0 #1b0b3a;text-align:center;width:100%}
-/* licznik wejsc */
+
 .counter{display:inline-flex;align-items:center;gap:10px;margin-top:8px;padding:9px 14px;background:var(--face);border:4px solid var(--ink);
   box-shadow:inset -3px -3px 0 #b9a2f2, inset 3px 3px 0 #fff, 0 4px 0 var(--violet-d);
   font-family:'Press Start 2P',monospace;font-size:11px;line-height:1.4;color:var(--ink)}
 .counter[hidden]{display:none}
 .counter svg{width:20px;height:20px;fill:var(--violet);flex:none}
 .counter b{font-weight:400;font-size:13px;color:var(--violet)}
-/* ekran wejscia - pojawia sie TYLKO gdy przegladarka blokuje autoodtwarzanie z dzwiekiem (potrzebny jest 1 klik) */
+
 #gate{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:20px;background:rgba(7,3,15,.5);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 #gate button{all:unset;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:12px;padding:24px 30px;max-width:100%;text-align:center;color:var(--ink);
   background:var(--face);border:4px solid var(--ink);box-shadow:inset -4px -4px 0 #b9a2f2, inset 4px 4px 0 #fff, 0 6px 0 var(--violet-d)}
@@ -78,7 +76,7 @@ footer{order:2;position:relative;z-index:2;margin-top:auto;height:36px;line-heig
 #gate button:active{transform:translateY(4px)}
 #gate .t{font-family:'Press Start 2P',monospace;font-size:clamp(16px,5vw,22px);line-height:1.4}
 #gate .s{font-size:22px;color:#5a3fa8;line-height:1.1}
-/* music */
+
 #music{position:fixed;top:12px;right:12px;z-index:5;display:flex;align-items:center;gap:8px;padding:6px 10px;background:var(--face);border:4px solid var(--ink);
   box-shadow:inset -3px -3px 0 #b9a2f2, inset 3px 3px 0 #fff, 0 4px 0 var(--violet-d)}
 #mute{all:unset;cursor:pointer;width:34px;height:34px;display:grid;place-items:center;background:var(--violet);border:3px solid var(--ink)}
@@ -137,9 +135,7 @@ footer{order:2;position:relative;z-index:2;margin-top:auto;height:36px;line-heig
 <footer>made by wvnch4j</footer>
 
 <script>
-/* ===== WIDEO W TLE + DZWIEK Z background.mp4 =====
-   Dzwiek pochodzi z samego wideo. Przegladarki blokuja autoodtwarzanie z dzwiekiem, dopoki uzytkownik
-   nie kliknie na stronie - wtedy pokazujemy ekran "Wejdz"; klikniecie od razu uruchamia wideo z dzwiekiem. */
+
 (function(){
   var v=document.getElementById('bg'), vol=document.getElementById('vol'), mute=document.getElementById('mute');
   var on=document.getElementById('icoOn'), off=document.getElementById('icoOff');
@@ -173,14 +169,10 @@ footer{order:2;position:relative;z-index:2;margin-top:auto;height:36px;line-heig
 })();
 </script>
 <script>
-/* ===== LICZNIK WEJSC =====
-   Dziala na darmowym publicznym liczniku (Abacus, abacus.jasoncameron.dev) - nie wymaga wlasnego serwera ani konta.
-   Zlicza 1 wejscie na sesje przegladarki (odswiezanie strony nie nabija licznika).
-   Lokalnie (file://, localhost) tylko odczytuje wartosc, zeby testy nie psuly statystyk.
-   Gdy licznik jest niedostepny - po prostu sie nie pokazuje. */
+
 (function(){
   var box=document.getElementById('counter'), out=document.getElementById('counterNum'); if(!box||!out) return;
-  var START=1126;   // wejscia sprzed uruchomienia licznika - dodawane do wyniku z uslugi
+  var START=1126;   
   var NS='wvnch4j-links', KEY='wejscia', FLAG='wvnch4j_counted_v1', BASE='https://abacus.jasoncameron.dev/';
   var local=location.protocol==='file:'||/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
   var counted=false; try{counted=!!sessionStorage.getItem(FLAG);}catch(e){}
@@ -199,7 +191,7 @@ footer{order:2;position:relative;z-index:2;margin-top:auto;height:36px;line-heig
     var n=num(j); if(n==null) throw new Error('bad');
     if(inc){try{sessionStorage.setItem(FLAG,'1');}catch(e){}}
     show(n+START);
-  }).catch(function(){ /* brak licznika: ukryty */ });
+  }).catch(function(){ });
 })();
 </script>
 </body>
